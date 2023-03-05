@@ -14,14 +14,19 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JSlider;
 import javax.swing.JComboBox;
+import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class TennisTimePanel extends JPanel{
 	private int count;
 	private JButton push;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
+	private Predictor predict;
 	
 	public TennisTimePanel() {
+		predict = new Predictor("./projectDos/data2.txt");
+		
 		count = 0;
 		push = new JButton ("Random!");
 		push.setBounds(10, 11, 105, 23);
@@ -30,14 +35,14 @@ public class TennisTimePanel extends JPanel{
 		
 		add (push);
 		setBackground(Color.LIGHT_GRAY);
-		setPreferredSize(new Dimension(644, 474));
+		setPreferredSize(new Dimension(800, 500));
 		
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Windy?");
 		chckbxNewCheckBox.setBounds(484, 324, 97, 23);
 		add(chckbxNewCheckBox);
 		
 		JLabel lblNewLabel = new JLabel("Make your own Instance!");
-		lblNewLabel.setBounds(367, 6, 131, 32);
+		lblNewLabel.setBounds(298, 6, 200, 32);
 		add(lblNewLabel);
 		
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Sunny");
@@ -65,13 +70,21 @@ public class TennisTimePanel extends JPanel{
 		slider.setValue(0);
 		slider.setPaintTicks(true);
 		slider.setMinorTickSpacing(10);
-		slider.setBounds(132, 194, 200, 74);
+		slider.setBounds(454, 49, 200, 74);
 		add(slider);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setToolTipText("");
-		comboBox.setBounds(110, 343, 194, 50);
+		comboBox.setBounds(474, 394, 194, 50);
 		add(comboBox);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(64, 211, 286, 232);
+		add(scrollPane);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setText(predict.toString());
+		scrollPane.setViewportView(textArea);
 	}
 	
 	
