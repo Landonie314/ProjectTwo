@@ -16,6 +16,7 @@ public class Predictor {
 	private String [] weather;
 	private String [] activity;
 	private String thing;
+	private ArrayList <String> acty;
 		
 	
 		
@@ -112,10 +113,24 @@ public class Predictor {
 		}
 		
 		//returns possible activities
-		public String getActivities(){		
-			String toReturn = "swimming, running, video games, tennis";
+		public String getActivities(){
+			acty = new ArrayList <String>();
+			for(int i = 0; i < pre.size(); i++) {
+				if(pre.get(i) != null) {
+					if (!acty.contains(pre.get(i).getPlay())) {
+						acty.add(pre.get(i).getPlay());
+					}
+				}
+			
+			}
+			String toReturn = acty.get(0);
+			for(int j = 1; j < acty.size(); j++) {
+				toReturn += (", " + acty.get(j));
+			}
+			//return
 			return toReturn;
 		}
+		
 		//toString method for predictor class
 		public String toString() {
 			String toReturn = "";

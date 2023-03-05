@@ -26,6 +26,7 @@ public class TennisTimePanel extends JPanel{
 	
 	public TennisTimePanel() {
 		predict = new Predictor("./projectDos/data2.txt");
+		System.out.println(predict.getActivities());
 		
 		count = 0;
 		push = new JButton ("Random!");
@@ -73,15 +74,18 @@ public class TennisTimePanel extends JPanel{
 		slider.setBounds(454, 49, 200, 74);
 		add(slider);
 		
+		//The only required element
 		JComboBox comboBox = new JComboBox();
 		comboBox.setToolTipText("");
 		comboBox.setBounds(474, 394, 194, 50);
 		add(comboBox);
 		
+		//Allows me to scross the text area
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(64, 211, 286, 232);
 		add(scrollPane);
 		
+		//Text area that displays the list of activities
 		JTextArea textArea = new JTextArea();
 		textArea.setText(predict.toString());
 		scrollPane.setViewportView(textArea);
