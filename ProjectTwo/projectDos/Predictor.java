@@ -32,6 +32,16 @@ public class Predictor {
 			pre.add(i);
 		}
 		
+		//Gets an instance
+		public Instance getInstance (int i) {
+			return pre.get(i);
+		}
+		
+		//Gets the size of the arraylist
+		public int getSize() {
+			return pre.size();
+		}
+		
 		//Changes the activity based on the day's attributes
 		public void changeActivity() {
 			
@@ -113,19 +123,19 @@ public class Predictor {
 		}
 		
 		//returns possible activities
-		public String getActivities(){
+		public String [] getActivities(){
 			acty = new ArrayList <String>();
-			for(int i = 0; i < pre.size(); i++) {
-				if(pre.get(i) != null) {
-					if (!acty.contains(pre.get(i).getPlay())) {
-						acty.add(pre.get(i).getPlay());
-					}
+			for(Instance instance : pre) {
+					if (!acty.contains(instance.getPlay())) {
+						acty.add(instance.getPlay());
 				}
 			
 			}
-			String toReturn = acty.get(0);
-			for(int j = 1; j < acty.size(); j++) {
-				toReturn += (", " + acty.get(j));
+			String [] toReturn = new String [acty.size()];
+			int index = 0;
+			for(String string : acty) {
+				toReturn[index] = string;
+				index++;
 			}
 			//return
 			return toReturn;
