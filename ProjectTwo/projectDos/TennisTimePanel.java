@@ -41,11 +41,11 @@ public class TennisTimePanel extends JPanel{
 		//Just some labels //Wont change
 		//Humidity
 		JLabel humidityLbl = new JLabel("Humidity: 0");
-		humidityLbl.setBounds(432, 120, 97, 32);
+		humidityLbl.setBounds(409, 129, 97, 32);
 		add(humidityLbl);
 		//Temp
 		JLabel temperLbl = new JLabel("Temperature: 0");
-		temperLbl.setBounds(432, 200, 97, 32);
+		temperLbl.setBounds(409, 201, 97, 32);
 		add(temperLbl);
 		//Activity
 		JLabel activityLbl = new JLabel("Activity:");
