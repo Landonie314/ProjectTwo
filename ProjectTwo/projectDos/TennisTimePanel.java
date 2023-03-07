@@ -236,6 +236,10 @@ public class TennisTimePanel extends JPanel{
 					if(out.equals("tornado")) {
 						tornRadio.setSelected(true);
 					}
+				//Windy?
+					if(yep.getWindy() == true) {
+						windyBox.setSelected(true);
+					}
 			}
 				else {
 					//Sets to default values
@@ -244,6 +248,7 @@ public class TennisTimePanel extends JPanel{
 					yep.setPlay("tennis");
 					comboBox.setSelectedItem(yep.getPlay());
 					sunRadio.setSelected(true);
+					windyBox.setSelected(false);
 				}
 				
 			}

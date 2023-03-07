@@ -88,7 +88,7 @@ public class Predictor {
 			yep.setPlay(activity[small]);
 			small = rng.nextInt(4);
 			yep.setOutlook(weather[small]);
-			coin = rng.nextInt(1);
+			coin = rng.nextInt(2);
 			if(coin == 0) {
 				yep.setWindy(false);
 			}
