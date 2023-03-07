@@ -225,7 +225,7 @@ public class TennisTimePanel extends JPanel{
 		
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				predict.removeInstance(finder.getValue());
 			}
 		});
 				

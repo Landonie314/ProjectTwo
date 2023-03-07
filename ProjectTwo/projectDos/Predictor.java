@@ -41,6 +41,10 @@ public class Predictor {
 		public int getSize() {
 			return pre.size();
 		}
+		//Removes an instance
+		public void removeInstance(int i) {
+			pre.remove(i);
+		}
 		
 		//Changes the activity based on the day's attributes
 		public void changeActivity() {
