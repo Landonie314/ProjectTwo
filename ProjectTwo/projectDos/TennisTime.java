@@ -1,7 +1,8 @@
 package projectDos;
 
 import javax.swing.JFrame;
-
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import projectDos.TennisTimePanel;
 
 public class TennisTime {
@@ -11,8 +12,14 @@ public class TennisTime {
 		
 		TennisTimePanel panel = new TennisTimePanel();
 		frame.getContentPane().add(panel);
-		
+		frame.setResizable(false);
 		frame.pack();
 		frame.setVisible(true);
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				panel.doClose();
+			}
+		});
+
 	}
 }

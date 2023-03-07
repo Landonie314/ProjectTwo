@@ -84,10 +84,10 @@ public class Predictor {
 			yep.setHumidity(big);
 			big = rng.nextInt(100);
 			yep.setTemperature(big);
-			small = rng.nextInt(3);
-			yep.setOutlook(weather[small]);
-			small = rng.nextInt(3);
+			small = rng.nextInt(4);
 			yep.setPlay(activity[small]);
+			small = rng.nextInt(4);
+			yep.setOutlook(weather[small]);
 			coin = rng.nextInt(1);
 			if(coin == 0) {
 				yep.setWindy(false);
@@ -224,7 +224,7 @@ public class Predictor {
 	}// end of writeFile method
 
 	
-	private void doWrite(String fn) {
+	void doWrite(String fn) {
 		// this method writes all of the data in the persons array to a file
 		try
 		{

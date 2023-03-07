@@ -12,6 +12,7 @@ import java.awt.Font;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSlider;
 import javax.swing.JComboBox;
@@ -36,11 +37,11 @@ public class TennisTimePanel extends JPanel{
 		
 		//Just some labels //Wont change
 		//Humidity
-		JLabel humidityLbl = new JLabel("Humidity:");
+		JLabel humidityLbl = new JLabel("Humidity: 0");
 		humidityLbl.setBounds(432, 120, 97, 32);
 		add(humidityLbl);
 		//Temp
-		JLabel temperLbl = new JLabel("Temperature:");
+		JLabel temperLbl = new JLabel("Temperature: 0");
 		temperLbl.setBounds(432, 200, 97, 32);
 		add(temperLbl);
 		//Activity
@@ -77,26 +78,26 @@ public class TennisTimePanel extends JPanel{
 		
 			//Radiobutton group for outlook selection
 		//Sunny
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Sunny");
-		rdbtnNewRadioButton.setSelected(true);
-		buttonGroup_1.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.setBounds(665, 281, 109, 32);
-		add(rdbtnNewRadioButton);
+		JRadioButton sunRadio = new JRadioButton("Sunny");
+		sunRadio.setSelected(true);
+		buttonGroup_1.add(sunRadio);
+		sunRadio.setBounds(665, 281, 109, 32);
+		add(sunRadio);
 		//Rainy
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Rainy");
-		buttonGroup_1.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setBounds(665, 310, 109, 32);
-		add(rdbtnNewRadioButton_1);
+		JRadioButton rainRadio = new JRadioButton("Rainy");
+		buttonGroup_1.add(rainRadio);
+		rainRadio.setBounds(665, 310, 109, 32);
+		add(rainRadio);
 		//Overcast
-		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Overcast");
-		buttonGroup_1.add(rdbtnNewRadioButton_2);
-		rdbtnNewRadioButton_2.setBounds(665, 340, 109, 32);
-		add(rdbtnNewRadioButton_2);
+		JRadioButton overRadio = new JRadioButton("Overcast");
+		buttonGroup_1.add(overRadio);
+		overRadio.setBounds(665, 340, 109, 32);
+		add(overRadio);
 		//Tornado
-		JRadioButton rdbtnNewRadioButton_3 = new JRadioButton("Tornado");
-		buttonGroup_1.add(rdbtnNewRadioButton_3);
-		rdbtnNewRadioButton_3.setBounds(665, 370, 109, 32);
-		add(rdbtnNewRadioButton_3);
+		JRadioButton tornRadio = new JRadioButton("Tornado");
+		buttonGroup_1.add(tornRadio);
+		tornRadio.setBounds(665, 370, 109, 32);
+		add(tornRadio);
 		
 			//ComboBox
 		//The only required element
@@ -106,7 +107,7 @@ public class TennisTimePanel extends JPanel{
 		comboBox.setBounds(409, 331, 194, 50);
 		add(comboBox);
 		
-		//Allows me to scross the text area
+		//Allows me to scroll the text area
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(20, 192, 324, 269);
 		add(scrollPane);
@@ -120,11 +121,22 @@ public class TennisTimePanel extends JPanel{
 			//Sliders
 		//Slider for Temperature
 		JSlider temper = new JSlider();
+		temper.setMinorTickSpacing(1);
+		temper.setMajorTickSpacing(10);
+		temper.setPaintLabels(true);
 		temper.setValue(0);
 		temper.setPaintTicks(true);
-		temper.setMinorTickSpacing(10);
 		temper.setBounds(539, 192, 236, 60);
+		//Slider listener
+		temper.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				int temp = temper.getValue();
+				temperLbl.setText("Temperature: " + temp);
+			}
+		});
 		add(temper);
+		
+		
 		
 		//Allows you to slide for an instance
 		JSlider finder = new JSlider();
@@ -148,13 +160,21 @@ public class TennisTimePanel extends JPanel{
 		add(finder);
 		
 		
-		
 		//Slider for Humidity
 		JSlider humidity = new JSlider();
+		humidity.setMinorTickSpacing(1);
+		humidity.setPaintLabels(true);
+		humidity.setMajorTickSpacing(10);
 		humidity.setValue(0);
 		humidity.setPaintTicks(true);
-		humidity.setMinorTickSpacing(10);
 		humidity.setBounds(539, 104, 235, 60);
+		//Slider listener
+		humidity.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				int humid = humidity.getValue();
+				humidityLbl.setText("Humidity: " + humid);
+			}
+		});
 		add(humidity);
 				
 		
@@ -193,9 +213,44 @@ public class TennisTimePanel extends JPanel{
 		
 		tglbtnRandom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//Our random generation
+				Instance yep = new Instance();
+				predict.initializeRandom();
+				yep = predict.randomInstance();
+				String out = yep.getOutlook();
+				if(tglbtnRandom.isSelected()) {
+				//Assigning random values
+				humidity.setValue(yep.getHumidity());
+				temper.setValue(yep.getTemperature());
+				comboBox.setSelectedItem(yep.getPlay());
+				//selection for button group
+					if(out.equals("sunny")) {
+						sunRadio.setSelected(true);
+					}
+					if(out.equals("rainy")) {
+						rainRadio.setSelected(true);
+					}
+					if(out.equals("overcast")) {
+						overRadio.setSelected(true);
+					}
+					if(out.equals("tornado")) {
+						tornRadio.setSelected(true);
+					}
+			}
+				else {
+					//Sets to default values
+					humidity.setValue(0);
+					temper.setValue(0);
+					yep.setPlay("tennis");
+					comboBox.setSelectedItem(yep.getPlay());
+					sunRadio.setSelected(true);
+				}
 				
 			}
 		});
 		
+	}
+	public void doClose() {
+		predict.writeFile("./projectDos/data2.txt");
 	}
 }
