@@ -1,3 +1,6 @@
+//Landon Jones
+//03/06/2023
+//Java Project 2
 package projectDos;
 
 import javax.swing.JFrame;
@@ -15,6 +18,7 @@ public class TennisTime {
 		frame.setResizable(false);
 		frame.pack();
 		frame.setVisible(true);
+		//Listens for window to close then writes to the file
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				panel.doClose();

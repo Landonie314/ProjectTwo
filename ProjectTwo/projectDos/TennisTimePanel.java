@@ -1,3 +1,6 @@
+//Landon Jones
+//03/06/2023
+//Java Project 2
 package projectDos;
 
 import java.awt.Color;
@@ -27,7 +30,7 @@ public class TennisTimePanel extends JPanel{
 	private final ButtonGroup buttonGroup_1 = new ButtonGroup();
 	private Predictor predict;
 	
-	
+	//Implemented guiItems: Button, radioButton, textArea, label, comboBox, checkBox, toggleButton, Slider (8 unique things)
 	public TennisTimePanel() {
 		predict = new Predictor("./projectDos/data2.txt");
 		setLayout(null);
@@ -234,7 +237,7 @@ public class TennisTimePanel extends JPanel{
 		tglbtnRandom.setBounds(365, 436, 121, 23);
 		add(tglbtnRandom);
 		
-		
+		//Listener for random toggle
 		tglbtnRandom.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//Our random generation
@@ -281,6 +284,7 @@ public class TennisTimePanel extends JPanel{
 		});
 		
 	}
+	//writes to the file
 	public void doClose() {
 		predict.writeFile("./projectDos/data2.txt");
 	}

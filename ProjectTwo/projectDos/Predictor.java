@@ -1,5 +1,6 @@
 //Landon Jones
-//Project 1
+//03/06/2023
+//Java Project 2
 package projectDos;
 import java.io.*;
 import java.util.*;
