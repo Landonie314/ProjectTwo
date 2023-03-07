@@ -130,8 +130,7 @@ public class TennisTimePanel extends JPanel{
 		//Slider listener
 		temper.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				int temp = temper.getValue();
-				temperLbl.setText("Temperature: " + temp);
+				temperLbl.setText("Temperature: " + temper.getValue());
 			}
 		});
 		add(temper);
@@ -171,8 +170,7 @@ public class TennisTimePanel extends JPanel{
 		//Slider listener
 		humidity.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
-				int humid = humidity.getValue();
-				humidityLbl.setText("Humidity: " + humid);
+				humidityLbl.setText("Humidity: " + humidity.getValue());
 			}
 		});
 		add(humidity);
@@ -186,11 +184,37 @@ public class TennisTimePanel extends JPanel{
 		//listener
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean isWindy = false;
+				//Starting variables
+				boolean aIsWindy = false;
+				//gets humidity
+				int humid = humidity.getValue();
+				//gets temperature
+				int temp = temper.getValue();
+				//Conditional based on user selection
 				if(windyBox.isSelected()) {
-					isWindy = true;
+					aIsWindy = true;
 				}
-				Instance toAdd = new Instance();
+				//Returns activity
+				String aAct = comboBox.getSelectedItem().toString();
+				//returns outlook
+				String aOut = "";
+				if(sunRadio.isSelected()) {
+					aOut = "sunny";
+				}
+				if(rainRadio.isSelected()) {
+					aOut = "rainy";
+				}
+				if(overRadio.isSelected()) {
+					aOut = "overcast";
+				}
+				if(tornRadio.isSelected()) {
+					aOut = "tornado";
+				}
+				
+				//Adds the selected parameters to an instance and then adds it to the predictor.
+				Instance toAdd = new Instance(aOut, temp, humid, aIsWindy, aAct);
+				predict.addInstance(toAdd);
+				
 			}
 		});
 		
@@ -218,6 +242,7 @@ public class TennisTimePanel extends JPanel{
 				predict.initializeRandom();
 				yep = predict.randomInstance();
 				String out = yep.getOutlook();
+				//Toggled on
 				if(tglbtnRandom.isSelected()) {
 				//Assigning random values
 				humidity.setValue(yep.getHumidity());
@@ -241,6 +266,7 @@ public class TennisTimePanel extends JPanel{
 						windyBox.setSelected(true);
 					}
 			}
+				//Toggled off
 				else {
 					//Sets to default values
 					humidity.setValue(0);

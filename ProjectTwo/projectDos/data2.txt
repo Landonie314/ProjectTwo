@@ -67,3 +67,4 @@ sunny,90,30,true,swimming
 sunny,29,39,false,tennis
 rainy,66,83,false,tennis
 rainy,74,85,false,tennis
+sunny,14,7,true,running
